@@ -143,6 +143,32 @@ docker push mountainpass/go-markdown-server:latest
 docker push mountainpass/go-markdown-server:v1.0.0
 ```
 
+### Multi-Platform Publishing
+
+For publishing images that work on both Mac (ARM64) and Linux (AMD64) architectures, use the dedicated multiplatform compose file:
+
+**Prerequisites:**
+```bash
+# Login to Docker Hub (or your preferred registry)
+docker login
+```
+
+**Build and publish multi-platform images:**
+```bash
+# Build and push directly to registry (recommended)
+docker-compose -f docker-compose.multiplatform.yml build --push
+
+# Or build first, then push separately
+docker-compose -f docker-compose.multiplatform.yml build
+docker-compose -f docker-compose.multiplatform.yml push
+```
+
+**Supported architectures:**
+- `linux/amd64` - Standard Linux x86_64 systems
+- `linux/arm64` - Mac M1/M2 (Apple Silicon) and ARM-based Linux systems
+
+**Note:** Multi-platform builds create manifest lists that automatically serve the correct architecture when pulled. The images are stored in the registry but won't appear in your local `docker image ls` output unless specifically loaded.
+
 **Pull and run from registry:**
 ```bash
 docker pull mountainpass/go-markdown-server:latest
@@ -163,7 +189,7 @@ docker run -p 8080:8080 mountainpass/go-markdown-server
 
 ### Run with custom content directory:
 ```bash
-docker run -p 8080:8080 -v /path/to/your/content:/content mountainpass/go-markdown-server
+docker run -p 8080:8080 -v ./content:/content mountainpass/go-markdown-server
 ```
 
 ### Environment variables in Docker:

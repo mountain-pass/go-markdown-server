@@ -1,0 +1,9 @@
+services:
+  go-markdown-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    image: mountainpass/go-markdown-server:latest

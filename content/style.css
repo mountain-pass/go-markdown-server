@@ -5,37 +5,83 @@
     box-sizing: border-box;
 }
 
+/* CSS Custom Properties for light and dark themes */
+:root {
+    --bg-color: #f8f9fa;
+    --container-bg: white;
+    --text-color: #333;
+    --heading-color: #2c3e50;
+    --heading-secondary: #34495e;
+    --nav-bg: #2c3e50;
+    --nav-text: white;
+    --nav-accent: #3498db;
+    --link-color: #3498db;
+    --link-hover: #2980b9;
+    --code-bg: #f4f4f4;
+    --border-color: #ddd;
+    --table-bg: #f8f9fa;
+    --blockquote-bg: #f8f9fa;
+    --hr-color: #ecf0f1;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode variables - automatically applied when user prefers dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --container-bg: #2d2d2d;
+        --text-color: #e0e0e0;
+        --heading-color: #ffffff;
+        --heading-secondary: #b0b0b0;
+        --nav-bg: #1f1f1f;
+        --nav-text: #ffffff;
+        --nav-accent: #4fc3f7;
+        --link-color: #4fc3f7;
+        --link-hover: #81d4fa;
+        --code-bg: #3a3a3a;
+        --border-color: #555;
+        --table-bg: #3a3a3a;
+        --blockquote-bg: #3a3a3a;
+        --hr-color: #555;
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--container-bg);
     min-height: 100vh;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Navigation */
 nav {
-    background-color: #2c3e50;
+    background-color: var(--nav-bg);
     padding: 1rem 2rem;
-    border-bottom: 3px solid #3498db;
+    border-bottom: 3px solid var(--nav-accent);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 nav a {
-    color: white;
+    color: var(--nav-text);
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    color: #3498db;
+    color: var(--nav-accent);
 }
 
 /* Main content */
@@ -46,27 +92,29 @@ main {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
-    color: #2c3e50;
+    color: var(--heading-color);
     line-height: 1.2;
+    transition: color 0.3s ease;
 }
 
 h1 {
     font-size: 2.5rem;
-    border-bottom: 3px solid #3498db;
+    border-bottom: 3px solid var(--nav-accent);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
+    transition: border-color 0.3s ease;
 }
 
 h2 {
     font-size: 2rem;
     margin-top: 2rem;
-    color: #34495e;
+    color: var(--heading-secondary);
 }
 
 h3 {
     font-size: 1.5rem;
     margin-top: 1.5rem;
-    color: #34495e;
+    color: var(--heading-secondary);
 }
 
 p {
@@ -76,13 +124,14 @@ p {
 
 /* Links */
 a {
-    color: #3498db;
+    color: var(--link-color);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #2980b9;
+    color: var(--link-hover);
 }
 
 /* Lists */
@@ -97,22 +146,24 @@ li {
 
 /* Code blocks */
 pre {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 1rem;
     margin-bottom: 1rem;
     overflow-x: auto;
     font-family: 'Monaco', 'Courier New', monospace;
     font-size: 0.9rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 code {
-    background-color: #f4f4f4;
+    background-color: var(--code-bg);
     padding: 0.2rem 0.4rem;
     border-radius: 3px;
     font-family: 'Monaco', 'Courier New', monospace;
     font-size: 0.9rem;
+    transition: background-color 0.3s ease;
 }
 
 pre code {
@@ -122,18 +173,20 @@ pre code {
 
 /* Blockquotes */
 blockquote {
-    border-left: 4px solid #3498db;
+    border-left: 4px solid var(--nav-accent);
     margin: 1rem 0;
     padding: 0.5rem 1rem;
-    background-color: #f8f9fa;
+    background-color: var(--blockquote-bg);
     font-style: italic;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Horizontal rules */
 hr {
     border: none;
-    border-top: 2px solid #ecf0f1;
+    border-top: 2px solid var(--hr-color);
     margin: 2rem 0;
+    transition: border-color 0.3s ease;
 }
 
 /* Tables */
@@ -144,29 +197,34 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 0.75rem;
     text-align: left;
+    transition: border-color 0.3s ease;
 }
 
 th {
-    background-color: #f8f9fa;
+    background-color: var(--table-bg);
     font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: var(--table-bg);
+    transition: background-color 0.3s ease;
 }
 
 /* Strong and emphasis */
 strong {
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--heading-color);
+    transition: color 0.3s ease;
 }
 
 em {
     font-style: italic;
-    color: #34495e;
+    color: var(--heading-secondary);
+    transition: color 0.3s ease;
 }
 
 /* Responsive design */
