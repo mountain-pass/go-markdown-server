@@ -1,0 +1,26 @@
+services:
+  go-markdown-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mountainpass/go-markdown-server:latest
+    container_name: go-markdown-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./content:/content
+    environment:
+      - PORT=8080
+      - CONTENT_DIR=/content
+      # - HTTP_SECURITY_HEADERS=disable  # Set to "disable" to turn off security headers
+    restart: unless-stopped
+    # Security: Drop all capabilities and only add back what's needed
+    cap_drop:
+      - ALL
+    # No additional capabilities needed for this simple HTTP server
+    # cap_add: []
+    # Security: Set security options
+    security_opt:
+      - no-new-privileges:true
+    # Security: Run as non-root user (defined in Dockerfile)
+    user: "1001:1001"
